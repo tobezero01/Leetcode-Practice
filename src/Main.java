@@ -286,6 +286,7 @@ public class Main {
 //        return ar;
 //    }
     public static void main(String[] args) {
-
+        int x = 1;
+        int b = 4;
     }
 }
