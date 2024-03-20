@@ -285,8 +285,48 @@ public class Main {
 //        }
 //        return ar;
 //    }
+
+    // 125
+////    public static boolean isPalindrome(String s) {
+////        StringBuilder stringBuilder = new StringBuilder();
+////        StringBuilder stringBuilder1 = new StringBuilder();
+////        if(s.equals("")) return true;
+////        s = s.toLowerCase().trim();
+////        for (int i = 0; i < s.length(); i++) {
+////            char x = s.charAt(i);
+////            if(x >= 'a' && x <= 'z' || x >= '0' && x<='9') {
+////                stringBuilder.append(x);
+////            }
+////        }
+////
+////        for (int i = stringBuilder.length()-1;i >= 0; i--) {
+////            stringBuilder1.append(stringBuilder.charAt(i));
+////        }
+////        return stringBuilder.toString().equals(stringBuilder1.toString());
+//
+//    }\
+
+//// 168
+//    public static String convertToTitle(int columnNumber) {
+//        StringBuilder columnName = new StringBuilder();
+//        while (columnNumber > 0) {
+//            int mod = (columnNumber - 1) % 26;
+//            columnName.insert(0, (char) (mod + 'A'));
+//            columnNumber = (columnNumber - mod) / 26;
+//        }
+//        return columnName.toString();
+//    }
+//
+//    //171
+//    public static int convertToTitle(String columnTitle) {
+//        int res = 0;
+//        for (int i = 0; i < columnTitle.length(); i++) {
+//            res *= 26;
+//            res+= (columnTitle.charAt(i)-'A' +1);
+//        }
+//        return res;
+//    }
     public static void main(String[] args) {
-        int x = 1;
-        int b = 4;
+
     }
 }
