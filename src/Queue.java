@@ -17,7 +17,6 @@ public class Queue {
     // Thêm một phần tử vào cuối queue
     public void enqueue(int value) {
         if (isFull()) {
-            System.out.println("Queue is full, cannot enqueue " + value);
             return;
         }
         if (rear == maxSize - 1) {
@@ -30,7 +29,6 @@ public class Queue {
     // Lấy và xóa phần tử đầu queue
     public int dequeue() {
         if (isEmpty()) {
-            System.out.println("Queue is empty");
             return -1;
         }
         int temp = queueArray[front++]; // Lấy phần tử tại vị trí front và di chuyển front lên
@@ -44,7 +42,6 @@ public class Queue {
     // Lấy phần tử đầu queue nhưng không xóa nó
     public int peekFront() {
         if (isEmpty()) {
-            System.out.println("Queue is empty");
             return -1;
         }
         return queueArray[front];
