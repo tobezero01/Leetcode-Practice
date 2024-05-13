@@ -1,3 +1,7 @@
+import javax.imageio.ImageTranscoder;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.math.BigInteger;
 import java.util.*;
 
 public class Main {
@@ -192,6 +196,8 @@ public class Main {
 //        }
 //        for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
 //            if (entry.getValue() > n/2) {
+//                entry.
+//            }
 //                return entry.getKey();
 //            }
 //        }
@@ -325,6 +331,195 @@ public class Main {
 //            res+= (columnTitle.charAt(i)-'A' +1);
 //        }
 //        return res;
+//    }
+
+    //202
+//    public static boolean isHappy(int n) {
+//        while(n!= 1 && n != 4) {
+//            int sum = 0;
+//            while (n!= 0) {
+//                sum+= (n%10)* (n%10);
+//                n/=10;
+//            }
+//            n =sum;
+//        }
+//        return n==1;
+//    }
+
+// 242
+//    public static boolean isAnagram(String s, String t) {
+//        if( s.length() != t.length() ) return false;
+//
+//        s = sortString(s);
+//        t = sortString(t);
+//        return s.equals(t);
+//    }
+//    public static String sortString(String s) {
+//        char [] c= s.toCharArray();
+//        Arrays.sort(c);
+//        StringBuilder stringBuilder = new StringBuilder();
+//        for (int i = 0; i < c.length; i++) {
+//            stringBuilder.append(c[i]);
+//        }
+//        return stringBuilder.toString();
+//    }
+
+    // 264
+//    public static int nthUglyNumber(int n) {
+//        int dp[] = new int[n + 1];
+//        dp[0] = 1;
+//        int i2 = 0, i3 = 0, i5 = 0;
+//        for (int i = 1; i < dp.length; i++) {
+//            dp[i] = Math.min(dp[i2] * 2, Math.min(dp[i3] * 3, dp[i5] * 5));
+//            if (dp[i] == dp[i2] * 2) {
+//                i2++;
+//            }
+//            if (dp[i] == dp[i3] * 3) {
+//                i3++;
+//            }
+//            if (dp[i] == dp[i5] * 5) {
+//                i5++;
+//            }
+//        }
+//        return dp[n - 1];
+//    }
+
+    // 290
+//    public static boolean wordPattern(String pattern, String s) {
+//        String [] s1 = s.split(" ");
+//        if(pattern.length() != s1.length) return false;
+//        HashMap<Character, String> map = new HashMap<>();
+//        for (int i = 0; i < s1.length; i++) {
+//            char a = pattern.charAt(i);
+//            String b = s1[i];
+//            if(map.containsKey(a)) {
+//                if(!map.get(a).equals(b)) return false;
+//            }else {
+//                if(map.containsValue(b)) return false;
+//                map.put(a,b);
+//            }
+//        }
+//        return true;
+//    }
+
+    //383
+//    public boolean canConstruct(String ransomNote, String magazine) {
+////        if(magazine.contains(ransomNote) ) {
+////
+////        }
+//        Map<Character, Integer> charFrequency = new HashMap<>();
+//        for (char c : magazine.toCharArray()) {
+//            charFrequency.put(c, charFrequency.getOrDefault(c, 0) + 1);
+//        }
+//        // tìm ngoại lệ
+//        for (char c : ransomNote.toCharArray()) {
+//            if (!charFrequency.containsKey(c) || charFrequency.get(c) == 0) {
+//                return false;
+//            }
+//            charFrequency.put(c, charFrequency.get(c) - 1);
+//        }
+//        return true;
+//    }
+
+    //387
+//    public static int firstUniqChar(String s) {
+//        Map<Character, Integer> map = new HashMap<>();
+//        char charResult = '0';
+//
+//        for( char x : s.toCharArray()) {
+//            map.put(x, map.getOrDefault(x,0) +1);
+//
+//        }
+//        // Duyệt qua mỗi entry trong map
+//        for (int i = 0; i < s.length(); i++) {
+//            if(map.get(s.charAt(i)) ==1) return i;
+//        }
+//        return -1;
+//    }
+    // 412
+//    public static List<String> fizzBuzz(int n) {
+//        List<String> a = new ArrayList<>();
+//        for (int i = 1; i <= n ; i++) {
+//            if(i%15 == 0 ) a.add("FizzBuzz");
+//            else if (i%3 == 0)  a.add("Fizz");
+//            else if (i%5 == 0) a.add("Buzz");
+//            else a.add(String.valueOf(i));
+//        }
+//        return a;
+//    }
+
+    //389
+//    public static char findTheDifference(String s, String t) {
+//        char[] count = new char[26];
+//        for (char c : s.toCharArray()) {
+//            count[c ]++;
+//        }
+//        for (char c : t.toCharArray()) {
+//            if (count[c ] == 0) {
+//                return c;
+//            } else {
+//                count[c ]--;
+//            }
+//        }
+//        return ' ';
+//    }
+
+    //392
+//    public static boolean isSubsequence(String s, String t) {
+//        int sPointer = 0, tPointer = 0;
+//
+//        while (sPointer < s.length() && tPointer < t.length()) {
+//            if (s.charAt(sPointer) == t.charAt(tPointer)) {
+//                sPointer++;
+//            }
+//            tPointer++;
+//        }
+//
+//        return sPointer == s.length();
+//    }
+    //409
+//    public static int longestPalindrome(String s) {
+//        // Count the frequency of each character
+//        Map<Character, Integer> charCount = new HashMap<>();
+//        for (char c : s.toCharArray()) {
+//            charCount.put(c, charCount.getOrDefault(c, 0) + 1);
+//        }
+//        int palindromeLength = 0;
+//        boolean hasOddCount = false;
+//        for (int count : charCount.values()) {
+//            palindromeLength += count / 2 * 2;
+//            if (count % 2 != 0) {
+//                hasOddCount = true;
+//            }
+//        }
+//        if (hasOddCount) {
+//            palindromeLength++;
+//        }
+//        return palindromeLength;
+//
+//
+//    }
+    //415
+//    public String addStrings(String num1, String num2) {
+//        StringBuilder result = new StringBuilder();
+//
+//        int carry = 0;
+//        int i = num1.length()-1;
+//        int j = num2.length()-1;
+//        while (i>=0 || j >=0 || carry != 0) {
+//            int digit1 = i >= 0 ? num1.charAt(i) -'0' : 0;
+//            int digit2 = j >= 0 ? num2.charAt(j) -'0' : 0;
+//            int sum = digit1 + digit2 + carry;
+//            carry = sum/10;
+//            result.append(sum%10);
+//            i--;j--;
+//        }
+//        return result.reverse().toString();
+//    }
+
+    //434
+//    public int countSegments(String s) {
+//
 //    }
     public static void main(String[] args) {
 
