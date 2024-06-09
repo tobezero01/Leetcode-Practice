@@ -513,8 +513,174 @@ public class Main {
 //    }
 
 
+
+    // sàng với độ phức tạp vừa phải
+    public static void primeOfEratosthenes() {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt(); // Số lượng trường hợp kiểm tra
+
+        for (int i = 0; i < n; i++) {
+            int a = sc.nextInt();
+            int b = sc.nextInt();
+
+            boolean[] isPrime = new boolean[b + 1];
+
+            // Ban đầu giả sử tất cả các số đều là số nguyên tố
+            for (int j = 2; j <= b; j++) {
+                isPrime[j] = true;
+            }
+
+            // Sàng Eratosthenes
+            for (int j = 2; j * j <= b; j++) {
+                if (isPrime[j]) {
+                    for (int k = j * j; k <= b; k += j) {
+                        isPrime[k] = false;
+                    }
+                }
+            }
+
+            // In ra các số nguyên tố trong đoạn [a, b]
+            for (int h = Math.max(2, a); h <= b; h++) {
+                if (isPrime[h]) {
+                    System.out.print(h + " ");
+                }
+            }
+            System.out.println();
+        }
+    }
+
+
+
+    public static void sumOfProduct() {
+        Scanner scanner = new Scanner(System.in);
+        int T = scanner.nextInt();
+
+        for (int t = 0; t < T; t++) {
+            int x = scanner.nextInt();
+
+            long sum = 0;
+            for (int i = 1; i <=  x; i++) {
+                sum+= i*(x/i)  %1000007;
+            }
+            System.out.println(sum);
+        }
+
+    }
+
+
+    public static void RemCua() {
+        Scanner scanner = new Scanner(System.in);
+        int T = scanner.nextInt();
+
+        for (int t = 1; t <= T; t++) {
+            int M = scanner.nextInt();
+            int N = scanner.nextInt();
+            scanner.nextLine(); // Đọc dòng trống sau dòng chứa M và N
+
+            int[] counts = new int[5]; // Mảng đếm số lượng trạng thái của mỗi loại rèm cửa
+
+            for (int i = 0; i < 5 * M + 1; i++) {
+                String line = scanner.nextLine();
+                for (int j = 0; j < line.length(); j++) {
+                    if (line.charAt(j) == '*') {
+                        int windowIndex = j / 5; // Xác định cửa sổ mà kí tự '*' thuộc về
+                        counts[windowIndex]++; // Tăng số lượng trạng thái của cửa sổ đó lên 1
+                    }
+                }
+            }
+
+            // In kết quả cho test case thứ t
+            System.out.print("#" + t + " ");
+            for (int count : counts) {
+                System.out.print(count + " ");
+            }
+            System.out.println(); // Xuống dòng sau khi in kết quả cho một test case
+        }
+    }
+
+    public static void logoDoiXung() {
+        Scanner scanner = new Scanner(System.in);
+        int T = scanner.nextInt();
+
+        for (int t = 1; t <= T; t++) {
+            int N = scanner.nextInt();
+            int[][] matrix = new int[N][N];
+            for (int i = 0; i < N; i++) {
+                for (int j = 0; j < N; j++) {
+                    matrix[i][j] = scanner.nextInt();
+                }
+            }
+            for (int i = 0; i < N / 2; i++) {
+                for (int j = 0; j < N; j++) {
+                    if (matrix[i][j] != matrix[N - i - 1][j]) {
+                        System.out.println("#" + t + " NO");
+                        return;
+                    }
+                }
+            }
+            for (int i = 0; i < N; i++) {
+                for (int j = 0; j < N / 2; j++) {
+                    if (matrix[i][j] != matrix[i][N - j - 1]) {
+                        System.out.println("#" + t + " NO");
+                        return;
+                    }
+                }
+            }
+            System.out.println("#" + t + " YES");
+        }
+    }
+
+
+    //BTFNUM - Số đẹp
+    public static boolean containsDigit(int number, int digit) {
+        while (number > 0) {
+            if (number % 10 == digit) {
+                return true;
+            }
+            number /= 10;
+        }
+        return false;
+    }
+
+    public static int countSpecialValues(int number, int[] specialValues) {
+        int count = 0;
+        while (number > 0) {
+            int digit = number % 10;
+            for (int specialValue : specialValues) {
+                if (digit == specialValue) {
+                    count++;
+                }
+            }
+            number /= 10;
+        }
+        return count;
+    }
+
     public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int T = scanner.nextInt();
+        for (int i = 1; i <= T; i++) {
+            int n = scanner.nextInt();
+            int m = scanner.nextInt();
+            int[] beautifulNumbers = new int[n];
+
+            for (int j = 0; j < n; j++) {
+                beautifulNumbers[j] = scanner.nextInt();
+            }
+
+            int x = scanner.nextInt();
+            int y = scanner.nextInt();
+
+            int count = 0;
+            for (int k = x; k <= y; k++) {
+                if (countSpecialValues(k,beautifulNumbers) >= m) {
+                    count++;
+                }
+            }
+            System.out.println("#" + i + " " + count);
+        }
 
 
+        scanner.close();
     }
 }

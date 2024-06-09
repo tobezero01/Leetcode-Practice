@@ -1286,13 +1286,223 @@ public class mainArrays {
 		}
         return count;
     }
+
+
+
+    //1089. Duplicate Zeros
+    public static void duplicateZeros(int[] arr) {
+        int[] tempArr = new int[arr.length];
+        
+        for (int arrIndex = 0, tempIndex = 0; tempIndex < tempArr.length; arrIndex++) {
+            tempArr[tempIndex] = arr[arrIndex];
+
+            if (tempArr[tempIndex++] == 0 && tempIndex < tempArr.length) {
+                tempArr[tempIndex++] = 0;
+            }
+        }
+         
+        System.arraycopy(tempArr, 0, arr, 0, arr.length);
+    }
+    
+    
+    
+    
+    //1128. Number of Equivalent Domino Pairs
+    public static int numEquivDominoPairs(int[][] dominoes) {
+//    	HashMap<String, Integer> hm = new HashMap<String, Integer>();
+//    	int count =0;
+//    	for (int i = 0; i < dominoes.length; i++) {
+//			String s1 = String.valueOf(dominoes[i][0]) + String.valueOf(dominoes[i][1]);
+//			String s2 = String.valueOf(dominoes[i][1]) + String.valueOf(dominoes[i][0]);
+//			if(hm.containsKey(s1)) count+=hm.get(s1);
+//			else if(hm.containsKey(s2)) count += hm.get(s2);
+//			
+//			if(s1.equals(s2)) hm.put(s1, hm.getOrDefault(s1, 0) +1);
+//			else {
+//				hm.put(s1, hm.getOrDefault(s1, 0) +1);
+//				hm.put(s2, hm.getOrDefault(s2, 0) +1);
+//			}
+//    	}
+    	int res = 0;
+        int[] counter = new int[100];
+        for (int[] d : dominoes) {
+            int d0 = d[0], d1 = d[1];
+            if (d0 < d1) counter[d0 * 10 + d1]++;
+            else counter[d1 * 10 + d0]++;
+        }
+        for (int v : counter)
+            res += v * (v - 1) / 2;
+        return res;
+    }
+    
+    
+    
+    
+    //1160. Find Words That Can Be Formed by Characters
+    public static int countCharacters(String[] words, String chars) {
+        int count = 0;
+        int[] countFreq = new int[26];
+        for(char s : chars.toCharArray()) {
+        	countFreq[s-'a']++;
+        }
+        
+        for(String word : words) {
+        	int []countWord = new int[26];
+        	for(char x : word.toCharArray()) {
+        		countWord[x - 'a'] ++;
+        	}
+        	
+        	boolean canMatch = true;
+        	
+        	for (int i = 0; i < 26; i++) {
+				if(countFreq[i] < countWord[i] ) {
+					canMatch = false;break;
+				}
+			}
+        	if(canMatch) count+= word.length();
+        }
+    	return count;
+    }
+    
+    
+    
+    
+    //1184. Distance Between Bus Stops
+    public static int distanceBetweenBusStops(int[] distance, int start, int destination) {
+        int n = distance.length,totalDistance=0;
+    	for(int s : distance) totalDistance+=s;
+    	int des= 0;
+    	if(start < destination) {
+    		for (int i = start; i < destination; i++) {
+    			des+= distance[i];
+    		}
+    	}else {
+    		for (int i = start-1; i >= destination; i--) {
+    			des+= distance[i];
+    		}
+    	}
+    	
+    	return Math.min(des, totalDistance-des);
+    }
+    
+    
+    
+    
+    
+    //1200. Minimum Absolute Difference
+    public static List<List<Integer>> minimumAbsDifference(int[] arr) {
+        Arrays.sort(arr);
+        int min = Integer.MAX_VALUE;
+        for (int i = 0; i < arr.length-1; i++) {
+			min = Math.min(min, arr[i+1]-arr[i]);
+		}
+        List<List<Integer>> list = new ArrayList<>();
+        for (int i = 0; i < arr.length-1; i++) {
+			if(arr[i+1]-arr[i] == min) {
+				List<Integer> sublist = new ArrayList<>();
+	            sublist.add(arr[i]);
+	            sublist.add(arr[i + 1]);
+	            list.add(sublist);
+			}
+		}
+    	return list;
+    }
+    
+    
+    
+    
+    //1207. Unique Number of Occurrences
+    public static boolean uniqueOccurrences(int[] arr) {
+    	int max = Integer.MIN_VALUE;
+    	int min = Integer.MAX_VALUE;
+    	int n= arr.length,count=0;
+        for (int i = 0; i < n; i++) {
+			max = Math.max(max,arr[i]);
+			min = Math.min(min, arr[i]);
+		}
+        int range = max-min+1;
+        
+        int[] temp = new int[range];
+        for (int i = 0; i < n; i++) {
+			temp[arr[i] -min]++;
+		}
+        HashSet<Integer> hs = new HashSet<Integer>();
+        for (int i = min; i <= max; i++) {
+			if(temp[i-min] > 0) {
+				count++;hs.add(temp[i-min]);
+			}
+		}
+        return count==hs.size();
+    }
+    
+    
+    
+    
+    //1217. Minimum Cost to Move Chips to The Same Position
+    public static int minCostToMoveChips(int[] position) {
+    	
+        return 0;
+    }
+    
+    
+    
+    
+    //1232. Check If It Is a Straight Line
+    public static boolean checkStraightLine(int[][] coordinates) {
+    	if (coordinates.length <= 2) {
+            return true;
+        }
+        int x1 = coordinates[0][0];
+        int y1 = coordinates[0][1];
+        int x2 = coordinates[1][0];
+        int y2 = coordinates[1][1];
+        for (int i = 2; i < coordinates.length; i++) {
+            int x3 = coordinates[i][0];
+            int y3 = coordinates[i][1];
+            if ((y2 - y1) * (x3 - x2) != (y3 - y2) * (x2 - x1)) {
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    
+    
+    
+    //42. Trapping Rain Water
+    public static int trap(int[] height) {
+        int n = height.length;
+        int l=0, r = n-1;
+        int res = 0, lMax =0, rMax=0;
+        while (l < r) {
+        	if(height[l] <= height[r]) {
+        		if(height[l] >= lMax) lMax = height[l];
+        		else res+=lMax - height[l];
+        		l++;
+        	}
+        	else {
+        		if(height[r] >= rMax){
+                    rMax = height[r];
+                }
+                else{
+                    res+= rMax - height[r];
+                }
+                r--;
+        	}
+        }
+        return res;
+    }
+    
+    
+    
     public static void main(String[] args) {
+    	System.out.print(uniqueOccurrences(new int[] {1,2,2,1,1,3}));
     	//findShortestSubArray(new int[] {1,2,3,1,4,2});
     	//System.out.println(dominantIndex(new int[] {3,6,1,0}));
     	//System.out.println(nextGreatestLetter(new char[] {'x', 'c'}, 'a') + "");
     	//countingSort(new int[] {1,4,3,2});
     	//System.out.println(distributeCandies(new int[] {6,6,6,6}));
-    	System.out.println(calcBinary("011"));
+    	//System.out.println(calcBinary("011"));
     	
 //        int x1 = 999;
 //        int x2=999;
